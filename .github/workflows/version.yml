@@ -1,5 +1,16 @@
-name: Push commit
-on: push
+name: Create New Version
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: What kind of change is this?
+        options: 
+        - major
+        - minor
+        - patch
+        default: patch
+
 jobs:
   report:
     runs-on: ubuntu-latest
@@ -9,7 +20,7 @@ jobs:
         run: npm version patch
       - name: push new tag
         run: |
-          git config --global user.name 'Peter'
+          git config --global user.name 'PeterNMcArthur'
           git config --global user.email 'PeterNMcArthur@users.noreply.github.com'
           git push --tags
           git push
